@@ -30,9 +30,7 @@ namespace Assets.App.Code.MVVM.ViewModels
         public void RemoveFolder()
         {
             if(archiveModel.Folders.Count == 0)
-            {
                 return;
-            }
 
             archiveModel.Folders.RemoveAt(0);
             UpdateFoldersCount();

@@ -1,4 +1,5 @@
 using Assets.App.Code.MVVM.Models;
+using Assets.App.Code.MVVM.View;
 using System;
 using UnityEngine;
 
@@ -7,32 +8,45 @@ namespace Assets.App.Code.MVVM.ViewModels
     public class ArchiveViewModel : MonoBehaviour
     {
         public event Action<int> OnFoldersCountChanged;
+        public event Action OnDocumentAdd;
+        public event Action<GameObject> OnPageOpen;
 
+        private ArchiveView archiveView;
         private ArchiveModel archiveModel;
 
         private void Awake()
         {
+            archiveView = GetComponent<ArchiveView>();
             archiveModel = new ArchiveModel();
+
+            OnPageOpen?.Invoke(archiveView.GetHomePage);
         }
 
         private void UpdateFoldersCount()
         {
-            OnFoldersCountChanged.Invoke(archiveModel.Folders.Count);
+            OnFoldersCountChanged.Invoke(archiveModel.Documents.Count);
         }
 
-        public void AddFolder()
+        public void AddTextDocument()
         {
-            archiveModel.Folders.Add(new Folder());
+            archiveModel.Documents.Add(new TextDocument
+            {
+                Title = archiveView.GetDocumentTitleText.text,
+                Text = archiveView.GetDocumentContentText.text
+            });
 
             UpdateFoldersCount();
+
+            OnPageOpen?.Invoke(archiveView.GetHomePage);
+            OnDocumentAdd?.Invoke();
         }
 
-        public void RemoveFolder()
+        public void RemoveDocument()
         {
-            if(archiveModel.Folders.Count == 0)
+            if(archiveModel.Documents.Count == 0)
                 return;
 
-            archiveModel.Folders.RemoveAt(0);
+            archiveModel.Documents.RemoveAt(0);
             UpdateFoldersCount();
         }
     }

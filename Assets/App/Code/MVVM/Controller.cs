@@ -6,13 +6,8 @@ public class Controller : MonoBehaviour
     [SerializeField]
     private ArchiveViewModel archiveViewModel;
 
-    public void Add()
+    public void AddTextDocument()
     {
-        archiveViewModel.AddFolder();
-    }
-
-    public void Remove()
-    {
-        archiveViewModel.RemoveFolder();
+        archiveViewModel.AddTextDocument();
     }
 }

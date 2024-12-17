@@ -4,24 +4,21 @@ namespace Assets.App.Code.MVVM.Models
 {
     public class ArchiveModel
     {
-        public List<Folder> Folders { get; set; } = new List<Folder>();
+        public List<Document> Documents { get; set; } = new List<Document>();
     }
 
-    public class Folder
+    public class TextDocument : Document
     {
-        public List<TextDocument> TextDocuments { get; set; } = new List<TextDocument> { };
-        public List<ListDocument> ListDocuments { get; set; } = new List<ListDocument> { };
-    }
-
-    public class TextDocument
-    {
-        public string Title { get; set; }
         public string Text { get; set; }
     }
 
-    public class ListDocument
+    public class ListDocument : Document
+    {
+        public List<string> Elements { get; set; }
+    }
+
+    public class Document
     {
         public string Title { get; set; }
-        public List<string> Elements { get; set; }
     }
 }

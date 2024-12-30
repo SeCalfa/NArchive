@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Assets.App.Code.MVVM.ViewModels;
 using UnityEngine;
 using TMPro;
@@ -38,6 +39,8 @@ namespace Assets.App.Code.MVVM.View
 
         [Space]
         [SerializeField] private ArchiveViewModel viewModel;
+
+        private List<GameObject> docItems = new();
 
         public GameObject GetHomePage => homePage;
 
@@ -104,11 +107,25 @@ namespace Assets.App.Code.MVVM.View
 
         private void InitAllDocuments()
         {
+            RemoveAllDocuments();
+            
             foreach (var doc in viewModel.GetArchiveModel.Documents)
             {
-                GameObject d = Instantiate(documentItem, foldersScrollBar);
+                var d = Instantiate(documentItem, foldersScrollBar);
                 d.GetComponent<DocumentItem>().Init(doc);
+                
+                docItems.Add(d);
             }
+        }
+
+        private void RemoveAllDocuments()
+        {
+            foreach (var docItem in docItems)
+            {
+                Destroy(docItem);
+            }
+            
+            docItems.Clear();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.App.Code.MVVM.Models;
 using Assets.App.Code.MVVM.ViewModels;
 using UnityEngine;
 using TMPro;
@@ -14,7 +15,7 @@ namespace Assets.App.Code.MVVM.View
         [Header("Buttons")]
         [SerializeField] private Button foldersButton;
         [SerializeField] private Button textDocumentButton;
-        [SerializeField] private Button listDoumentButton;
+        [SerializeField] private Button listDocumentButton;
         [SerializeField] private Button[] backButtons;
 
         [Header("Pages")]
@@ -37,9 +38,6 @@ namespace Assets.App.Code.MVVM.View
         [Header("Folders Page")]
         [SerializeField] private Transform foldersScrollBar;
 
-        [Space]
-        [SerializeField] private ArchiveViewModel viewModel;
-
         private List<GameObject> docItems = new();
 
         public GameObject GetHomePage => homePage;
@@ -51,11 +49,17 @@ namespace Assets.App.Code.MVVM.View
 
         public Transform GetListScrollBar => listScrollBar;
 
-        private void Awake()
+        private ArchiveModel archiveModel;
+        private ArchiveViewModel archiveViewModel;
+
+        public void Construct(ArchiveModel archiveModel, ArchiveViewModel archiveViewModel)
         {
-            viewModel.OnFoldersCountChanged += UpdateFoldersCount;
-            viewModel.OnDocumentAdd += ClearAllInputFields;
-            viewModel.OnPageOpen += OpenPage;
+            this.archiveModel = archiveModel;
+            this.archiveViewModel = archiveViewModel;
+            
+            this.archiveViewModel.OnFoldersCountChanged += UpdateFoldersCount;
+            this.archiveViewModel.OnDocumentAdd += ClearAllInputFields;
+            this.archiveViewModel.OnPageOpen += OpenPage;
 
             foldersButton.onClick.AddListener(delegate
             {
@@ -68,7 +72,7 @@ namespace Assets.App.Code.MVVM.View
                 OpenPage(textDocumentPage);
             });
 
-            listDoumentButton.onClick.AddListener(delegate
+            listDocumentButton.onClick.AddListener(delegate
             {
                 OpenPage(listDocumentPage);
             });
@@ -109,7 +113,7 @@ namespace Assets.App.Code.MVVM.View
         {
             RemoveAllDocuments();
             
-            foreach (var doc in viewModel.GetArchiveModel.Documents)
+            foreach (var doc in archiveModel.Documents)
             {
                 var d = Instantiate(documentItem, foldersScrollBar);
                 d.GetComponent<DocumentItem>().Init(doc);

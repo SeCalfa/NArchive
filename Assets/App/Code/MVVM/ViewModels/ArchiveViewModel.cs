@@ -2,37 +2,34 @@ using Assets.App.Code.MVVM.Models;
 using Assets.App.Code.MVVM.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Assets.App.Code.MVVM.ViewModels
 {
-    public class ArchiveViewModel : MonoBehaviour
+    public class ArchiveViewModel
     {
-        [SerializeField]
-        private GameObject listItem;
-
         public event Action<int> OnFoldersCountChanged;
         public event Action OnDocumentAdd;
         public event Action<GameObject> OnPageOpen;
 
-        private ArchiveView archiveView;
-        private ArchiveModel archiveModel;
+        private readonly ArchiveModel archiveModel;
+        private readonly ArchiveView archiveView;
+        private readonly GameObject listItem;
 
-        private List<ListItem> listItems = new List<ListItem>();
+        private readonly List<ListItem> listItems = new();
 
-        public ArchiveModel GetArchiveModel => archiveModel;
-
-        private void Awake()
+        public ArchiveViewModel(ArchiveModel archiveModel, ArchiveView archiveView, GameObject listItem)
         {
-            archiveView = GetComponent<ArchiveView>();
-            archiveModel = new ArchiveModel();
-
-            OnPageOpen?.Invoke(archiveView.GetHomePage);
+            this.archiveModel = archiveModel;
+            this.archiveView = archiveView;
+            this.listItem = listItem;
         }
 
         private void UpdateFoldersCount()
         {
-            OnFoldersCountChanged.Invoke(archiveModel.Documents.Count);
+            OnFoldersCountChanged?.Invoke(archiveModel.Documents.Count);
         }
 
         public void AddTextDocument()
@@ -51,12 +48,7 @@ namespace Assets.App.Code.MVVM.ViewModels
 
         public void AddListDocument()
         {
-            List<string> elements = new List<string>();
-
-            foreach (var item in listItems)
-            {
-                elements.Add(item.GetInputFieldText());
-            }
+            var elements = listItems.Select(item => item.GetInputFieldText()).ToList();
 
             archiveModel.Documents.Add(new ListDocument
             {
@@ -70,18 +62,9 @@ namespace Assets.App.Code.MVVM.ViewModels
             OnDocumentAdd?.Invoke();
         }
 
-        public void RemoveDocument()
-        {
-            if(archiveModel.Documents.Count == 0)
-                return;
-
-            archiveModel.Documents.RemoveAt(0);
-            UpdateFoldersCount();
-        }
-
         public void AddListItem()
         {
-            GameObject item = Instantiate(listItem, archiveView.GetListScrollBar);
+            var item = Object.Instantiate(listItem, archiveView.GetListScrollBar);
             listItems.Add(item.GetComponent<ListItem>());
         }
 
@@ -89,7 +72,7 @@ namespace Assets.App.Code.MVVM.ViewModels
         {
             if (listItems.Count > 0)
             {
-                Destroy(listItems[listItems.Count - 1].gameObject);
+                Object.Destroy(listItems[^1].gameObject);
                 listItems.RemoveAt(listItems.Count - 1);
             }
         }

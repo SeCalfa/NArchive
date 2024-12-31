@@ -1053,7 +1053,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &350864075
 MonoBehaviour:
@@ -1720,9 +1720,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083762981}
-        m_TargetAssemblyTypeName: Assets.App.Code.MVVM.ViewModels.ArchiveViewModel,
-          Assembly-CSharp
+      - m_Target: {fileID: 1083762984}
+        m_TargetAssemblyTypeName: App.Code.Container, Assembly-CSharp
         m_MethodName: AddTextDocument
         m_Mode: 1
         m_Arguments:
@@ -2008,6 +2007,7 @@ GameObject:
   - component: {fileID: 666500591}
   - component: {fileID: 666500590}
   - component: {fileID: 666500589}
+  - component: {fileID: 666500593}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2100,6 +2100,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &666500593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666500588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d883319b04557498d72af24f5bb2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  documentItem: {fileID: 6242189673283411, guid: 7ac806a0e8e14a54b92486d00178addd, type: 3}
+  foldersButton: {fileID: 462987893}
+  textDocumentButton: {fileID: 1413292199}
+  listDocumentButton: {fileID: 981088508}
+  backButtons:
+  - {fileID: 101933372}
+  - {fileID: 352724453}
+  - {fileID: 1716182679}
+  homePage: {fileID: 351031224}
+  textDocumentPage: {fileID: 1692578029}
+  listDocumentPage: {fileID: 1326296891}
+  foldersPage: {fileID: 1413609687}
+  foldersCountText: {fileID: 1067158851}
+  documentTitleText: {fileID: 357884694}
+  documentContentText: {fileID: 727808943}
+  listTitleText: {fileID: 769751813}
+  listScrollBar: {fileID: 1415646968}
+  foldersScrollBar: {fileID: 350864074}
 --- !u!1 &727808941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,9 +2831,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083762981}
-        m_TargetAssemblyTypeName: Assets.App.Code.MVVM.ViewModels.ArchiveViewModel,
-          Assembly-CSharp
+      - m_Target: {fileID: 1083762984}
+        m_TargetAssemblyTypeName: App.Code.Container, Assembly-CSharp
         m_MethodName: AddListDocument
         m_Mode: 1
         m_Arguments:
@@ -3553,59 +3582,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083762983}
-  - component: {fileID: 1083762982}
-  - component: {fileID: 1083762981}
+  - component: {fileID: 1083762984}
   m_Layer: 0
-  m_Name: MVVM
+  m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1083762981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083762980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a8e04c66688c8e498bde534d83297f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listItem: {fileID: 365495343842649897, guid: c4df5f3fbd2f0894cb9c2fd7f222e1ba, type: 3}
---- !u!114 &1083762982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1083762980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d883319b04557498d72af24f5bb2e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  documentItem: {fileID: 6242189673283411, guid: 7ac806a0e8e14a54b92486d00178addd, type: 3}
-  foldersButton: {fileID: 462987893}
-  textDocumentButton: {fileID: 1413292199}
-  listDoumentButton: {fileID: 981088508}
-  backButtons:
-  - {fileID: 101933372}
-  - {fileID: 352724453}
-  - {fileID: 1716182679}
-  homePage: {fileID: 351031224}
-  textDocumentPage: {fileID: 1692578029}
-  listDocumentPage: {fileID: 1326296891}
-  foldersPage: {fileID: 1413609687}
-  foldersCountText: {fileID: 1067158851}
-  documentTitleText: {fileID: 357884694}
-  documentContentText: {fileID: 727808943}
-  listTitleText: {fileID: 769751813}
-  listScrollBar: {fileID: 1415646968}
-  foldersScrollBar: {fileID: 350864074}
-  viewModel: {fileID: 1083762981}
 --- !u!4 &1083762983
 Transform:
   m_ObjectHideFlags: 0
@@ -3621,6 +3605,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1083762984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083762980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90126fe9659b4772b269278c96be2409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listItem: {fileID: 365495343842649897, guid: c4df5f3fbd2f0894cb9c2fd7f222e1ba, type: 3}
+  archiveView: {fileID: 666500593}
 --- !u!1 &1115702693
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,9 +4047,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083762981}
-        m_TargetAssemblyTypeName: Assets.App.Code.MVVM.ViewModels.ArchiveViewModel,
-          Assembly-CSharp
+      - m_Target: {fileID: 1083762984}
+        m_TargetAssemblyTypeName: App.Code.Container, Assembly-CSharp
         m_MethodName: AddListItem
         m_Mode: 1
         m_Arguments:
@@ -4260,9 +4257,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083762981}
-        m_TargetAssemblyTypeName: Assets.App.Code.MVVM.ViewModels.ArchiveViewModel,
-          Assembly-CSharp
+      - m_Target: {fileID: 1083762984}
+        m_TargetAssemblyTypeName: App.Code.Container, Assembly-CSharp
         m_MethodName: RemoveListItem
         m_Mode: 1
         m_Arguments:
@@ -4487,7 +4483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1413609688
 RectTransform:
   m_ObjectHideFlags: 0

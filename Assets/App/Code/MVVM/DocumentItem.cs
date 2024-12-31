@@ -17,14 +17,7 @@ namespace Assets.App.Code.MVVM
         [SerializeField] private Image background;
         [SerializeField] private TextMeshProUGUI title;
 
-        private Button button;
-
         private Document activeDocument;
-
-        private void Awake()
-        {
-            button = GetComponent<Button>();
-        }
 
         public void Init(Document document)
         {
@@ -42,13 +35,6 @@ namespace Assets.App.Code.MVVM
             }
 
             title.text = activeDocument.Title;
-
-            InitButton();
-        }
-
-        private void InitButton()
-        {
-            //button.onClick.AddListener();
         }
     }
 }

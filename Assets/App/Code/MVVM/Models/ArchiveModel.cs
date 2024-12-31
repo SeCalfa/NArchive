@@ -4,7 +4,7 @@ namespace Assets.App.Code.MVVM.Models
 {
     public class ArchiveModel
     {
-        public List<Document> Documents { get; set; } = new List<Document>();
+        public List<Document> Documents { get; set; } = new();
     }
 
     public class TextDocument : Document

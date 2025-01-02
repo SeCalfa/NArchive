@@ -1,7 +1,7 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace Assets.App.Code.MVVM
+namespace App.Code.MVVM
 {
     public class ListItem : MonoBehaviour
     {

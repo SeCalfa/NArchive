@@ -1,12 +1,12 @@
-using Assets.App.Code.MVVM.Models;
-using Assets.App.Code.MVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using App.Code.MVVM.Models;
+using App.Code.MVVM.View;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Assets.App.Code.MVVM.ViewModels
+namespace App.Code.MVVM.ViewModels
 {
     public class ArchiveViewModel
     {
@@ -27,17 +27,17 @@ namespace Assets.App.Code.MVVM.ViewModels
             this.listItem = listItem;
         }
 
-        private void UpdateFoldersCount()
+        public void UpdateFoldersCount()
         {
-            OnFoldersCountChanged?.Invoke(archiveModel.Documents.Count);
+            OnFoldersCountChanged?.Invoke(archiveModel.textDocuments.Count + archiveModel.listDocuments.Count);
         }
 
         public void AddTextDocument()
         {
-            archiveModel.Documents.Add(new TextDocument
+            archiveModel.textDocuments.Add(new TextDocument
             {
-                Title = archiveView.GetDocumentTitleText.text,
-                Text = archiveView.GetDocumentContentText.text
+                title = archiveView.GetDocumentTitleText.text,
+                text = archiveView.GetDocumentContentText.text
             });
 
             UpdateFoldersCount();
@@ -49,11 +49,12 @@ namespace Assets.App.Code.MVVM.ViewModels
         public void AddListDocument()
         {
             var elements = listItems.Select(item => item.GetInputFieldText()).ToList();
+            Debug.Log(elements.Count);
 
-            archiveModel.Documents.Add(new ListDocument
+            archiveModel.listDocuments.Add(new ListDocument
             {
-                Title = archiveView.GetListTitleText.text,
-                Elements = elements
+                title = archiveView.GetListTitleText.text,
+                elements = elements
             });
 
             UpdateFoldersCount();

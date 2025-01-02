@@ -1,24 +1,30 @@
+using System;
 using System.Collections.Generic;
 
-namespace Assets.App.Code.MVVM.Models
+namespace App.Code.MVVM.Models
 {
+    [Serializable]
     public class ArchiveModel
     {
-        public List<Document> Documents { get; set; } = new();
+        public List<TextDocument> textDocuments = new();
+        public List<ListDocument> listDocuments = new();
     }
 
+    [Serializable]
     public class TextDocument : Document
     {
-        public string Text { get; set; }
+        public string text;
     }
 
+    [Serializable]
     public class ListDocument : Document
     {
-        public List<string> Elements { get; set; }
+        public List<string> elements = new();
     }
 
+    [Serializable]
     public class Document
     {
-        public string Title { get; set; }
+        public string title;
     }
 }

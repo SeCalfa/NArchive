@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Assets.App.Code.MVVM.Models;
-using Assets.App.Code.MVVM.ViewModels;
-using UnityEngine;
+using App.Code.MVVM.Models;
+using App.Code.MVVM.ViewModels;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.App.Code.MVVM.View
+namespace App.Code.MVVM.View
 {
     public class ArchiveView : MonoBehaviour
     {
@@ -113,7 +113,15 @@ namespace Assets.App.Code.MVVM.View
         {
             RemoveAllDocuments();
             
-            foreach (var doc in archiveModel.Documents)
+            foreach (var doc in archiveModel.textDocuments)
+            {
+                var d = Instantiate(documentItem, foldersScrollBar);
+                d.GetComponent<DocumentItem>().Init(doc);
+                
+                docItems.Add(d);
+            }
+            
+            foreach (var doc in archiveModel.listDocuments)
             {
                 var d = Instantiate(documentItem, foldersScrollBar);
                 d.GetComponent<DocumentItem>().Init(doc);

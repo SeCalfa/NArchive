@@ -1,6 +1,7 @@
-using Assets.App.Code.MVVM.Models;
-using Assets.App.Code.MVVM.View;
-using Assets.App.Code.MVVM.ViewModels;
+using App.Code.MVVM;
+using App.Code.MVVM.Models;
+using App.Code.MVVM.View;
+using App.Code.MVVM.ViewModels;
 using UnityEngine;
 
 namespace App.Code
@@ -11,15 +12,25 @@ namespace App.Code
         [Space]
         [SerializeField] private ArchiveView archiveView;
 
+        private JsonHandler jsonHandler;
         private ArchiveModel archiveModel;
         private ArchiveViewModel archiveViewModel;
         
         private void Awake()
         {
-            archiveModel = new ArchiveModel();
-            archiveViewModel = new ArchiveViewModel(archiveModel, archiveView, listItem);
+            jsonHandler = new JsonHandler();
+            archiveModel = jsonHandler.ArchiveInit();
             
+            archiveViewModel = new ArchiveViewModel(archiveModel, archiveView, listItem);
+
             archiveView.Construct(archiveModel, archiveViewModel);
+            
+            archiveViewModel.UpdateFoldersCount();
+        }
+
+        private void OnDestroy()
+        {
+            jsonHandler.SaveToJson(archiveModel);
         }
 
         public void AddTextDocument() => archiveViewModel.AddTextDocument();

@@ -1,9 +1,9 @@
-using Assets.App.Code.MVVM.Models;
+using App.Code.MVVM.Models;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.App.Code.MVVM
+namespace App.Code.MVVM
 {
     public class DocumentItem : MonoBehaviour
     {
@@ -34,7 +34,7 @@ namespace Assets.App.Code.MVVM
                 background.color = checklistColor;
             }
 
-            title.text = activeDocument.Title;
+            title.text = activeDocument.title;
         }
     }
 }
